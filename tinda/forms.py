@@ -34,7 +34,7 @@ class CustomUserCreationForm(UserCreationForm):
         }
 
 class CommentForm(ModelForm):
-    post = forms.ModelChoiceField(queryset=UploadModel.objects.all(), initial=UploadModel.objects.last())
+    post = forms.ModelChoiceField(queryset=UploadModel.objects.all())
     class Meta:
         model=Comment
         fields=['post','text']

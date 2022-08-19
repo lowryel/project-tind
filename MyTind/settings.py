@@ -26,8 +26,8 @@ SECRET_KEY = 'django-insecure-d8#dyave8n$d5b9o+!7!_751mpa@)xkfyz__&d6=g^p7pg+)v#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ["localhost", "letind-dev.us-east-1.elasticbeanstalk.com"]
-
+# ALLOWED_HOSTS = ["localhost", "letind-dev.us-east-1.elasticbeanstalk.com"]
+ALLOWED_HOSTS = []
 
 # Application definition
 
@@ -75,13 +75,22 @@ WSGI_APPLICATION = 'MyTind.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/4.0/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.postgresql',
+#         'NAME': 'tind',
+#         'USER': 'lowry',
+#         'HOST': 'localhost',
+#         'PASSWORD': 'cartelo009',
+#     }
+# }
+
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
     }
 }
-
 
 # Password validation
 # https://docs.djangoproject.com/en/4.0/ref/settings/#auth-password-validators
