@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+    
+    {% block content %}
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<style>
+    div{
+        width: 70%;
+        margin: 0 80px;
+        text-align: center;
+        display: block;
+    }
+    input{
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        margin: 2px;
+    }
+    form{
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        flex-wrap: nowrap;
+        align-self: center;
+    }
+</style>
+<body style="background-color: beige;">
+    <div class="" style="background-color: rgb(186, 204, 219); padding-bottom: 40px;">
+        <h2 class="text-center">Login with your username and password</h2>
+        <form action="" method="post" style="border-radius: 5px;">
+            {% csrf_token %}
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Enter your password">
+                <input class="btn btn-warning" type="submit" value="Login">
+        </form>
+    </div>
+
+
+
+</body>
+</html>
+{% endblock %}

@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<div style="margin:10px 120px; ">
+    <div>
+        <img style="height: 300px; width: 400px; border-radius: 15px;" src="{{post.image.url}}" alt="">
+    </div>
+    <div>
+        <div class="col-md-4">
+            <form style="display: inline-flex; font-size: small; font-family: monospace;"
+                action="" method="post">
+                {% csrf_token %}
+                {{form}}
+                <input type="submit" value="▶">
+            </form>
+        </div>
+    </div>
+    <div class="">
+        {% for com in comment %}
+        <div>
+            <div style="border: 1px solid rgb(184, 231, 250);" class="row font-family-monospace">
+                <a href="{% url 'home' %}">{{com.name}}</a>
+                <p>{{com.post}}</p>
+                <p>{{com.text}}</p>
+                <p>{{com.time_ns}}</p>
+            </div>        
+        </div>
+        {% endfor %}        
+    </div>
+
+</div>
+{% endblock %}

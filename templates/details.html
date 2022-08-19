@@ -1,0 +1,60 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+    <title>My Details</title>
+    <link rel="stylesheet" href="{% static 'css/details.css' %}">
+<body style="font-family: monospace; background-color: bisque;">
+
+    <h2>My Details</h2>
+    <div class="row">
+        <div class="col-8 details">
+            <div>
+                <img src="{{model.image.url}}" alt="">
+            </div>
+            <div>
+                <p>{{model.name}}</p>
+                <p>{{model.username}}</p>
+                <p>{{model.date_of_birth|timesince}}</p>
+                <p>{{model.date_joined}}</p>
+                <p>{{model.location}}</p>
+            </div>
+
+        </div>
+        <div class="col-3">
+
+            <div>
+                <details>
+                    <summary class="btn btn-primary">Update Info</summary>
+                    <div style="padding: 10px; line-height: 0.5cm; font-size: small;">
+                        <form action="" method="post">
+                            {% csrf_token %}
+                            {{form.as_p}}
+                            <input class="btn btn-outline-warning"  type="submit" value="Update">
+                        </form>
+                    </div>
+                </details>
+                
+            </div>
+        </div>
+        
+    </div>
+    <div class="gallery row">
+        <h2 class="text-center font-monospace">My Gallery</h2>
+        {% for item in owner_gallery %}
+        <div class="col-3">
+            <div class="single-item">
+                <div>
+                    <img src="{{item.image.url}}" alt="">
+                </div>
+                <div>
+                    <p>{{item.name}}</p>
+                    <p>{{item.caption}}</p>
+                    <p>{{item.category}}</p>
+                    <p>{{item.timestamp}}</p>
+                </div>
+            </div>
+        </div>
+        {% endfor %}
+    </div>
+</body>
+{% endblock %}

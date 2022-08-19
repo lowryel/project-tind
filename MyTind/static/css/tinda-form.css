@@ -1,0 +1,9 @@
+#tinda-form{
+    font-family: monospace;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    /* width: 100%; */
+    background-color: bisque;
+}

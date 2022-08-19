@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+{% block content %}
+{% load static %}
+<title>My Tinda Profile</title>
+<link rel="stylesheet" href="{% static 'css/profile.css' %}">
+</head>
+<body>
+
+    <h2>My Details</h2>
+    {% for tind in model %}
+    <div>
+        <span class="profile-img">
+            <div>
+                <a href="{% url 'details' tind.pk %}">
+                    <img  src="{{tind.image.url}}" alt="">
+                </a>
+            </div>
+            <div>
+                <p>{{tind.username}}</p>
+                <p>{{tind.date_of_birth|timesince}}</p>
+                <p>{{tind.date_joined}}</p>
+                <p>{{tind.location}}</p>
+            </div>
+                   
+        </span>
+        
+    </div>
+    {% endfor %}
+    <div class="container-md">
+        <div class="row d-inline-flex justify-content-between">
+            <div class="col-3">
+                <img src="{% static './img/4.png' %}" alt="">
+                <p>Lorem ipsum dolor, sit amet consectetur adipisicing elit. Ipsa provident officiis ab perspiciatis, totam reprehenderit aliquam fugiat animi nobis dignissimos. Perferendis error veniam porro pariatur quisquam exercitationem maxime sint laudantium repudiandae sit ullam, explicabo iste beatae eveniet cumque officiis fugiat reprehenderit illo ratione odit ipsum suscipit alias amet! Nostrum omnis nulla quod animi saepe laudantium quia enim officiis ipsam libero.</p>
+            </div>
+            <div class="col-3">
+                <img src="{% static './img/4.png' %}" alt="">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque similique eligendi, odio sint provident perspiciatis doloribus nam ullam officiis reiciendis rem nulla doloremque assumenda non ipsum, voluptates minima consequatur perferendis quisquam. Accusantium nemo, pariatur rem deserunt quos accusamus dolores mollitia perferendis. Tempore tenetur dolorem omnis repudiandae in mollitia, sunt dolor aut! Ullam, neque tempora officia voluptates expedita magni maiores cumque.</p>
+            </div>
+            <div class="col-3">
+                <img src="{% static './img/4.png' %}" alt="">
+                <p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Eaque similique eligendi, odio sint provident perspiciatis doloribus nam ullam officiis reiciendis rem nulla doloremque assumenda non ipsum, voluptates minima consequatur perferendis quisquam. Accusantium nemo, pariatur rem deserunt quos accusamus dolores mollitia perferendis. Tempore tenetur dolorem omnis repudiandae in mollitia, sunt dolor aut! Ullam, neque tempora officia voluptates expedita magni maiores cumque.</p>
+            </div>
+        </div>
+    </div>
+</body>
+{% endblock %}

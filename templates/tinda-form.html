@@ -1,0 +1,23 @@
+{% extends 'base.html' %}
+{% load static %}
+{% block content %}
+<title>Tinda Form</title>
+<link rel="stylesheet" href="{% static 'css/tinda-form.css' %}">
+<body>
+    <div id="tinda-form" class="align-content-center p-3 m-sm-4 m-xl-3">
+        <form class="date-picker" action="" method="post" enctype="multipart/form-data">
+            {% csrf_token %}
+            {{form.as_p}}
+            <input class="btn btn-outline-info"  type="submit" value="Submit">
+        </form>
+    </div>
+
+    <div></div>
+
+
+    
+</body>
+
+{% endblock %}
+
+
