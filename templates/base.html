@@ -64,11 +64,11 @@
                     <div class="">
                         <a href="{% url 'comment' item.id %}"><img src="{{item.image.url}}" alt=""></a>
                     </div>
-                    <div class="">
-                        <li>{{item.name}}</li><br>
-                        <li>{{item.caption}}</li><br>
+                    <div class="details">
+                        <strong><li>{{item.name}}</li></strong>
+                        <li>{{item.caption}}</li>
                         <li>{{item.category}}</li>
-                        <li>{{item.timestamp|timesince}} {{item.timestamp|pluralize}}</li>
+                        <li>{{item.timestamp|timesince}} {{item.timestamp|pluralize}} ago</li>
                         <li>{{item.user}}</li>
 
                     </div>
