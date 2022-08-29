@@ -12,12 +12,6 @@ class NewTinda(forms.ModelForm):
     class Meta:
         model=TindaDates
         fields='__all__'
-
-    # def clean_username(self):
-    #     username=self.cleaned_data['username']
-    #     if username!=self.request.user.username:
-    #         raise forms.ValidationError("This space requires your username")
-    #     return username
         
 
 class UploadForm(ModelForm):

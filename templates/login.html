@@ -10,19 +10,22 @@
 </head>
 
 <style>
-    div{
-        width: 70%;
-        margin: 0 80px;
-        text-align: center;
+    .container {
+        width: 40%;
+        padding-bottom: 10px;
+    }
+    .login{
+        width: 100%;
+        position: relative;
+        height: 50vh;
+        padding: 20px;
         display: block;
-    }
-    input{
-        align-items: center;
-        display: flex;
         justify-content: center;
-        margin: 2px;
+        align-items: center;
     }
-    form{
+
+    
+    .form-input{
         display: flex;
         justify-content: center;
         flex-direction: column;
@@ -30,14 +33,14 @@
         align-self: center;
     }
 </style>
-<body style="background-color: beige;">
-    <div class="" style="background-color: rgb(186, 204, 219); padding-bottom: 40px;">
-        <h2 class="text-center">Login with your username and password</h2>
-        <form action="" method="post" style="border-radius: 5px;">
+<body class="container" style="background-color: beige;">
+    <div class="login" style="background-color: rgb(186, 204, 219); padding-bottom: 40px;">
+        <strong><p class="text-center">Login with your username and password</p></strong>
+        <form class="form-input" action="" method="post" style="border-radius: 5px;">
             {% csrf_token %}
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Enter your password">
-                <input class="btn btn-warning" type="submit" value="Login">
+                <input type="text" name="username" placeholder="👨Username">
+                <input type="password" name="password" placeholder="🔒Enter your password">
+                <input class="btn btn-primary" type="submit" value="Login">
         </form>
     </div>
 

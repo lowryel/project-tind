@@ -8,14 +8,14 @@ User=settings.AUTH_USER_MODEL
 
 # Create your models here.
 class TindaDates(models.Model):
-    username=models.OneToOneField(User, on_delete=models.CASCADE)
+    user=models.OneToOneField(User, on_delete=models.CASCADE)
     date_of_birth=models.DateTimeField(auto_now_add=False)
     date_joined=models.DateTimeField(auto_now_add=True)
     location=models.CharField(max_length=120, blank=True, null=True)
     image=models.ImageField(upload_to='media')
 
     def __str__(self):
-        return self.username.username
+        return self.user.username
 
 
 class Category(models.Model):
@@ -25,19 +25,15 @@ class Category(models.Model):
         return self.name
 
 class UploadModel(models.Model):
-    owner=models.ForeignKey(User, on_delete=models.CASCADE)
+    user=models.ForeignKey(User, on_delete=models.CASCADE)
     name=models.CharField(max_length=120, blank=True, null=True)
     caption=models.CharField(max_length=120, blank=True, null=True)
     image=models.ImageField(upload_to='media')
     category=models.ForeignKey(Category, on_delete=models.CASCADE)
     timestamp=models.DateTimeField(auto_now_add=True, blank=True, null=True)
-    likes=models.ForeignKey(User, on_delete=models.PROTECT, null=True, blank=True, related_name='like_post')
     
     def __str__(self):
         return self.name
-
-    def number_of_likes(self):
-        return self.likes.count()
 
 
 class Comment(models.Model):

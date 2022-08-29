@@ -1,11 +1,11 @@
 from django.contrib import messages
 from django.shortcuts import get_object_or_404
 from django.shortcuts import render, redirect
-from django.views.generic import CreateView
+from django.views.generic import CreateView, DetailView
 from django.contrib.auth.decorators import login_required
                            
 from tinda.models import TindaDates, UploadModel, Comment
-from tinda.forms import NewTinda, CustomUserCreationForm, CommentForm
+from tinda.forms import NewTinda, CustomUserCreationForm, CommentForm, UploadForm
 from django.db.models import Q
 
 from django.contrib.auth.models import User
@@ -16,7 +16,7 @@ def home(request):
     if request.GET.get('search_query'):
         search_query=request.GET.get('search_query')
     gallery=UploadModel.objects.distinct().filter(Q(name__icontains=search_query)|
-                                                  Q(owner__username__icontains=search_query)|
+                                                  Q(user__username__icontains=search_query)|
                                                   Q(category__name__icontains=search_query)).order_by('-timestamp')
     context={'gallery':gallery, 'search_query':search_query}
     return render(request, 'base.html', context)
@@ -25,8 +25,6 @@ def home(request):
 def commentPost(request, pk):
     post=UploadModel.objects.get(id=pk)
     comment=Comment.objects.filter(post=post)
-    for i in comment:
-        print(i.post.owner)
 
     form=CommentForm()
     if request.method=='POST':
@@ -41,19 +39,23 @@ def commentPost(request, pk):
     context={'comment':comment, 'post':post, 'form':form}
     return render(request, 'comment.html', context)
 
-
-@login_required(login_url='login')
-def user_details(request):
-    model=TindaDates.objects.get(username=request.user)
-    mygallery=UploadModel.objects.filter(owner=request.user)
-    form=NewTinda(instance=model)
+@login_required(login_url="login")
+def galleryview(request):
+    queryset=TindaDates.objects.get(user=request.user)
+    model=UploadModel.objects.filter(user=request.user)
+    form=UploadForm()
     if request.method=='POST':
-        
-        form=NewTinda(request.POST, instance=model)
+        form=UploadForm(request.POST or None)
         if form.is_valid():
-            form.save()
-            return redirect('home')
-    context={'form':form,'model':model, 'owner_gallery':mygallery}
+            form.save(commit=False)
+            messages.info(request, "form submitted")
+            return redirect('details')
+        
+    context={
+        "model":model,
+        "form":form,
+        'queryset':queryset
+    }
     return render(request, 'details.html', context)
 
 
@@ -61,7 +63,7 @@ class NewTindaCreateView(CreateView):
     form_class=NewTinda
     queryset=TindaDates.objects.all()
     template_name='tinda-form.html'
-    success_url='/'
+    success_url='new_tinda'
 
 
 def loginPage(request):
@@ -78,7 +80,7 @@ def loginPage(request):
             messages.success(request, 'You are now logged in')
             return redirect('home')
         else:
-            messages.info(request, 'Invalid credentials')
+            messages.info(request, 'invalid credentials')
             return redirect('login')        
     return render(request, 'login.html')
 
@@ -95,7 +97,7 @@ def registerUser(request):
             user.save()
             messages.info(request, 'User created successfully')
             login(request, user)
-            return redirect('/')
+            return redirect('new_tinda')
         else:
             messages.info(request, 'An error has occurred')
     return render(request, 'register.html', {'form':form})

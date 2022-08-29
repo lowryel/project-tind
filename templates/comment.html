@@ -19,7 +19,6 @@
         {% for com in comment %}
         <div>
             <div style="border: 1px solid rgb(184, 231, 250);" class="row font-family-monospace">
-                <a href="{% url 'home' %}">{{com.name}}</a>
                 <p>{{com.post}}</p>
                 <p>{{com.text}}</p>
                 <p>{{com.time_ns}}</p>
