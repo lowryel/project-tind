@@ -126,6 +126,9 @@ USE_I18N = True
 
 USE_TZ = True
 
+
+CSRF_TRUSTED_ORIGINS = ["https://social-showboot.herokuapp.com"]
+
 STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
 
 # Static files (CSS, JavaScript, Images)
