@@ -6,7 +6,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Tind | Login</title>
 </head>
 
 <style>
@@ -37,17 +37,7 @@
             width: 100%;
             padding-bottom: 5px;
         }
-/* 
-        .sidebar{
-            display: none;
-        }
-        .show-sidebar{
-            display: inline;
-            position: fixed;
-            top: 4.4rem;
-            height: auto;
-        } */
-    
+
     }
 </style>
 <body class="container" style="background-color: beige;">
@@ -55,9 +45,9 @@
         <strong><p class="text-center">Login with your username and password</p></strong>
         <form class="form-input" action="" method="post" style="border-radius: 5px;">
             {% csrf_token %}
-                <input type="text" name="username" placeholder="👨Username">
-                <input type="password" name="password" placeholder="🔒Enter your password">
-                <input class="btn btn-primary" type="submit" value="Login">
+            <input type="text" name="username" placeholder="👨Username">
+            <input type="password" name="password" placeholder="🔒Enter your password">
+            <input class="btn btn-primary" type="submit" value="Login">
         </form>
     </div>
 
