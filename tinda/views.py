@@ -10,6 +10,7 @@ from django.db.models import Q
 
 from django.contrib.auth.models import User
 from django.contrib.auth import authenticate, login, logout
+import calendar
 
 def home(request):
     search_query=""
@@ -42,14 +43,14 @@ def commentPost(request, pk):
 @login_required(login_url="login")
 def galleryview(request):
     queryset=TindaDates.objects.get(user=request.user)
-    model=UploadModel.objects.filter(user=request.user)
-    form=UploadForm()
-    if request.method=='POST':
-        form=UploadForm(request.POST or None)
-        if form.is_valid():
-            form.save(commit=False)
-            messages.info(request, "form submitted")
-            return redirect('details')
+    model=UploadModel.objects.filter(user__username=request.user)
+    # form=UploadForm()
+    form=UploadForm(request.POST)
+    if form.is_valid():
+        user=form.save(commit=False)
+        user.save()
+        messages.info(request, "form submitted")
+        return redirect('details')
         
     context={
         "model":model,
